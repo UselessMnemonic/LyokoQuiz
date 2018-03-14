@@ -9,14 +9,16 @@ import android.widget.Toast;
 
 public class LyokoQuizActivity extends AppCompatActivity {
 
-	private Button mTrueButton, mFalseButton, mNextButton;
+	private Button mTrueButton, mFalseButton, mNextButton, mPrevButton;
 	private TextView mQuestionTextView;
 
 	private Question[] mQuestionBank = new Question[]{
-			new Question(R.string.question_question1, true),
+			new Question(R.string.question_question1, false),
 			new Question(R.string.question_question2, true),
-			new Question(R.string.question_question3, true),
-			new Question(R.string.question_question4, true)
+			new Question(R.string.question_question3, false),
+			new Question(R.string.question_question4, true),
+			new Question(R.string.question_question5, false),
+			new Question(R.string.question_question6, true)
 	};
 
 	private int mCurrentIndex = 0;
@@ -40,6 +42,7 @@ public class LyokoQuizActivity extends AppCompatActivity {
 		mTrueButton = findViewById(R.id.true_button);
 		mFalseButton = findViewById(R.id.false_button);
 		mNextButton = findViewById(R.id.next_button);
+		mPrevButton = findViewById(R.id.prev_button);
 		mQuestionTextView = findViewById(R.id.question_text_view);
 
 		updateQuestion();
@@ -63,6 +66,16 @@ public class LyokoQuizActivity extends AppCompatActivity {
 			public void onClick(View view)
 			{
 				mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
+				updateQuestion();
+			}
+		});
+		mPrevButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View view)
+			{
+				mCurrentIndex -= 1;
+				if(mCurrentIndex < 0)
+					mCurrentIndex = mQuestionBank.length - 1;
 				updateQuestion();
 			}
 		});

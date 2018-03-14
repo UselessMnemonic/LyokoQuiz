@@ -3,11 +3,14 @@
     <string name="true_button">True</string>
     <string name="false_button">False</string>
     <string name="next_button">Next</string>
+    <string name="prev_button">Previous</string>
     <string name="correct_toast">Awesome!</string>
     <string name="incorrect_toast">Try Again.</string>
 
-    <string name="question_question1">This is a question.</string>
-    <string name="question_question2">This is another question.</string>
-    <string name="question_question3">You wil answer this question.</string>
-    <string name="question_question4">This question has the reference ID "question_question4".</string>
+    <string name="question_question1">The name of the Virtual World is Lee\'s Yolk-O\'s</string>
+    <string name="question_question2">Yumi wielded Japanese War fans</string>
+    <string name="question_question3">Jeremy Belpois roomed with Ulrich Stern</string>
+    <string name="question_question4">The boarding school is called Kadic Academy</string>
+    <string name="question_question5">The show is set in Germany</string>
+    <string name="question_question6">The name of the rouge AI is XANA</string>
 </resources>
