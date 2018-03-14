@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">LyokoQuiz</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="next_button">Next</string>
+    <string name="correct_toast">Awesome!</string>
+    <string name="incorrect_toast">Try Again.</string>
+
+    <string name="question_question1">This is a question.</string>
+    <string name="question_question2">This is another question.</string>
+    <string name="question_question3">You wil answer this question.</string>
+    <string name="question_question4">This question has the reference ID "question_question4".</string>
 </resources>
