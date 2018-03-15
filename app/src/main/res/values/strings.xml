@@ -4,6 +4,7 @@
     <string name="false_button">False</string>
     <string name="next_button">Next</string>
     <string name="prev_button">Previous</string>
+    <string name="hint_button">Hint</string>
     <string name="correct_toast">Awesome!</string>
     <string name="incorrect_toast">Try Again.</string>
 
@@ -13,4 +14,11 @@
     <string name="question_question4">The boarding school is called Kadic Academy</string>
     <string name="question_question5">The show is set in Germany</string>
     <string name="question_question6">The name of the rouge AI is XANA</string>
+
+    <string name="question_hint1">What is the app\'s name?</string>
+    <string name="question_hint2">Do you remember Yumi\'s range?</string>
+    <string name="question_hint3">Ulrich hates Odd\'s dog, Kiwi.</string>
+    <string name="question_hint4">Phillip K...</string>
+    <string name="question_hint5">What sort of name is Belpois?</string>
+    <string name="question_hint6">What is an idyllic, exotic, or luxurious place?</string>
 </resources>

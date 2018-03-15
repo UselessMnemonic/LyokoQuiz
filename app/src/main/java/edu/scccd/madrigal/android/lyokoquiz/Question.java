@@ -9,10 +9,12 @@ package edu.scccd.madrigal.android.lyokoquiz;
 public class Question
 {
     private int mQuestionId;
+    private int mHintId;
     private boolean mAnswer;
 
-    public Question(int questionTextId, boolean answer) {
+    public Question(int questionTextId, int hintId, boolean answer) {
         mQuestionId = questionTextId;
+        mHintId = hintId;
         mAnswer = answer;
     }
 
@@ -22,6 +24,14 @@ public class Question
 
     public void setQuestionId(int questionId) {
         mQuestionId = questionId;
+    }
+
+    public int getHintId() {
+        return mHintId;
+    }
+
+    public void setHintId(int hintId) {
+        mHintId = hintId;
     }
 
     public boolean isAnswer() {
