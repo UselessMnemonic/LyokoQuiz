@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="question1">The name of the Virtual World is Lee\'s Yolk-O\'s</string>
+    <string name="hint1">What is the app\'s name?</string>
+    <bool name="answer1">false</bool>
+
+    <string name="question2">Yumi wielded Japanese War fans</string>
+    <string name="hint2">Do you remember Yumi\'s range?</string>
+    <bool name="answer2">false</bool>
+
+    <string name="question3">Jeremy Belpois roomed with Ulrich Stern</string>
+    <string name="hint3">Ulrich hates Odd\'s dog, Kiwi.</string>
+    <bool name="answer3">false</bool>
+
+    <string name="question4">The boarding school is called Kadic Academy</string>
+    <string name="hint4">Phillip K&#8230;</string>
+    <bool name="answer4">false</bool>
+
+    <string name="question5">The show is set in Germany</string>
+    <string name="hint5">What sort of name is Belpois?</string>
+    <bool name="answer5">false</bool>
+
+    <string name="question6">The name of the rouge AI is XANA</string>
+    <string name="hint6">What is an idyllic, exotic, or luxurious place?</string>
+    <bool name="answer6">false</bool>
+
+    <string name="question7">Placeholder</string>
+    <string name="hint7">Placeholder</string>
+    <bool name="answer7">false</bool>
+
+    <string name="question8">Placeholder</string>
+    <string name="hint8">Placeholder</string>
+    <bool name="answer8">false</bool>
+
+    <string name="question9">Placeholder</string>
+    <string name="hint9">Placeholder</string>
+    <bool name="answer9">false</bool>
+
+    <string name="question10">Placeholder</string>
+    <string name="hint10">Placeholder</string>
+    <bool name="answer10">false</bool>
+
+    <integer name="numQuestions">10</integer>
+</resources>
