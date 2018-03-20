@@ -6,7 +6,7 @@
 
     <string name="question2">Yumi wielded Japanese War fans</string>
     <string name="hint2">Do you remember Yumi\'s range?</string>
-    <bool name="answer2">false</bool>
+    <bool name="answer2">true</bool>
 
     <string name="question3">Jeremy Belpois roomed with Ulrich Stern</string>
     <string name="hint3">Ulrich hates Odd\'s dog, Kiwi.</string>
@@ -14,7 +14,7 @@
 
     <string name="question4">The boarding school is called Kadic Academy</string>
     <string name="hint4">Phillip K&#8230;</string>
-    <bool name="answer4">false</bool>
+    <bool name="answer4">true</bool>
 
     <string name="question5">The show is set in Germany</string>
     <string name="hint5">What sort of name is Belpois?</string>
@@ -22,23 +22,21 @@
 
     <string name="question6">The name of the rouge AI is XANA</string>
     <string name="hint6">What is an idyllic, exotic, or luxurious place?</string>
-    <bool name="answer6">false</bool>
+    <bool name="answer6">true</bool>
 
-    <string name="question7">Placeholder</string>
-    <string name="hint7">Placeholder</string>
+    <string name="question7">The school\'s reporters are Nicholas Poliakoff and Herb Pichon</string>
+    <string name="hint7">What\'s SHE doing here?!</string>
     <bool name="answer7">false</bool>
 
-    <string name="question8">Placeholder</string>
-    <string name="hint8">Placeholder</string>
+    <string name="question8">The headmaster\'s daughter\'s nickname is Emilee Delmas.</string>
+    <string name="hint8">It\'s Sissy! I hate being called...</string>
     <bool name="answer8">false</bool>
 
-    <string name="question9">Placeholder</string>
-    <string name="hint9">Placeholder</string>
-    <bool name="answer9">false</bool>
+    <string name="question9">The school\'s Phys-Ed teacher is Jim Morales.</string>
+    <string name="hint9">I\'d rather not talk about it.</string>
+    <bool name="answer9">true</bool>
 
-    <string name="question10">Placeholder</string>
-    <string name="hint10">Placeholder</string>
-    <bool name="answer10">false</bool>
-
-    <integer name="numQuestions">10</integer>
+    <string name="question10">A clone of William Dunbar was made to cover his disappearance up.</string>
+    <string name="hint10">I can\'t eat it if it\'s on my ribs.</string>
+    <bool name="answer10">true</bool>
 </resources>

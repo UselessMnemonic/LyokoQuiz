@@ -14,12 +14,24 @@ import java.util.Random;
 public class LyokoQuizActivity extends AppCompatActivity {
 
     private static final String TAG = "LyokoQuizActivity";
+    private static final String INDEX_KEY = "index";
 
 	private Button mTrueButton, mFalseButton, mHintButton;
 	private ImageButton mNextButton, mPrevButton, mRandomButton;
 	private TextView mQuestionTextView, mQuestionNumberView;
 
-	private Question[] mQuestionBank;
+	private Question[] mQuestionBank = {
+			new Question(R.string.question1, R.string.hint1, false),
+			new Question(R.string.question2, R.string.hint2, true),
+			new Question(R.string.question3, R.string.hint3, false),
+			new Question(R.string.question4, R.string.hint4, true),
+			new Question(R.string.question5, R.string.hint5, false),
+			new Question(R.string.question6, R.string.hint6, true),
+			new Question(R.string.question7, R.string.hint7, false),
+			new Question(R.string.question8, R.string.hint8, false),
+			new Question(R.string.question9, R.string.hint9, true),
+			new Question(R.string.question10, R.string.hint10, true),
+	};
 
 	private int mCurrentIndex = 0;
 
@@ -42,6 +54,7 @@ public class LyokoQuizActivity extends AppCompatActivity {
 
 		Log.d(TAG, "the sytem just called onCreate(Bundle) and life is good?");
 
+		//grab references to widgets
 		mTrueButton = findViewById(R.id.true_button);
 		mFalseButton = findViewById(R.id.false_button);
 		mNextButton = findViewById(R.id.next_button);
@@ -51,8 +64,15 @@ public class LyokoQuizActivity extends AppCompatActivity {
 		mHintButton = findViewById(R.id.hint_button);
 		mRandomButton = findViewById(R.id.random_button);
 
+		//retrieve state or start new
+		if(savedInstanceState != null)
+			mCurrentIndex = savedInstanceState.getInt(INDEX_KEY);
+		else
+			mCurrentIndex = 0;
+
 		updateQuestion();
 
+		//give widgets their listeners
 		mTrueButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view)
@@ -89,7 +109,7 @@ public class LyokoQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                int nextIndex = 0;
+                int nextIndex;
                 do {
                     nextIndex = (new Random().nextInt(mQuestionBank.length));
                 }while(nextIndex == mCurrentIndex);
@@ -108,43 +128,40 @@ public class LyokoQuizActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public void
-	onStart() {
+	public void onStart() {
 		super.onStart();
 		Log.d(TAG,"onStart() called");
 	}
 
 	@Override
-	public void
-	onPause() {
+	public void onPause() {
 		super.onPause();
 		Log.d(TAG,"onPause() called");
 	}
 
 	@Override
-	public void
-	onResume() {
+	public void onResume() {
 		super.onResume();
 		Log.d(TAG,"onResume() called");
 	}
 
 	@Override
-	public void
-	onStop() {
+	public void onStop() {
 		super.onStop();
 		Log.d(TAG,"onStop() called");
 	}
 
 	@Override
-	public void
-	onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();
 		Log.d(TAG,"onDestroy() called");
 	}
 
-	public void populateQuestions()
-    {
-        Question[] mQuestionBank = new Question[];
-        for(int i = 0; i < R.in)
-    }
+	@Override
+	protected void onSaveInstanceState(Bundle bundle)
+	{
+		super.onSaveInstanceState(bundle);
+		Log.i(TAG, "onSaveInstanceState");
+		bundle.putInt(INDEX_KEY, mCurrentIndex);
+	}
 }
