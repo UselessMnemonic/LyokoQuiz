@@ -20,7 +20,7 @@
         android:layout_height="30dp">
 
         <TextView
-            android:id="@+id/question_number_view"
+            android:id="@+id/score_view"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -91,6 +91,15 @@
             android:scaleType="fitCenter"
             android:elevation="2dp"
             android:src="@drawable/ic_random"/>
+
+        <Button
+            android:id="@+id/cheat_button"
+            android:layout_width="80dip"
+            android:layout_height="50dip"
+            android:scaleType="fitCenter"
+            android:elevation="2dp"
+            android:text="@string/cheat_button_text"/>
+
     </LinearLayout>
 
 </LinearLayout>

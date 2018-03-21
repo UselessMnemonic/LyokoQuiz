@@ -1,5 +1,6 @@
 package edu.scccd.madrigal.android.lyokoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +16,13 @@ public class LyokoQuizActivity extends AppCompatActivity {
 
     private static final String TAG = "LyokoQuizActivity";
     private static final String INDEX_KEY = "index";
+    private static final String SCORE_KEY = "score";
 
-	private Button mTrueButton, mFalseButton, mHintButton;
+	private Button mTrueButton, mFalseButton, mHintButton, mCheatButton;
 	private ImageButton mNextButton, mPrevButton, mRandomButton;
-	private TextView mQuestionTextView, mQuestionNumberView;
+	private TextView mQuestionTextView, mScoreView;
+
+	private int mCurrentScore;
 
 	private Question[] mQuestionBank = {
 			new Question(R.string.question1, R.string.hint1, false),
@@ -37,12 +41,18 @@ public class LyokoQuizActivity extends AppCompatActivity {
 
 	private void updateQuestion() {
 		mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionId());
-		mQuestionNumberView.setText((mCurrentIndex+1) + "/" + mQuestionBank.length);
 	}
 
+	private void updateScore(){
+        mScoreView.setText(getText(R.string.score_text) + ": " + mCurrentScore);
+    }
+
 	private void checkAnswer(boolean answer) {
-		if(answer == mQuestionBank[mCurrentIndex].isAnswer())
-			Toast.makeText(LyokoQuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+		if(answer == mQuestionBank[mCurrentIndex].getAnswer()) {
+            Toast.makeText(LyokoQuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+            mCurrentScore++;
+            updateScore();
+        }
 		else
 			Toast.makeText(LyokoQuizActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
 	}
@@ -60,17 +70,25 @@ public class LyokoQuizActivity extends AppCompatActivity {
 		mNextButton = findViewById(R.id.next_button);
 		mPrevButton = findViewById(R.id.prev_button);
 		mQuestionTextView = findViewById(R.id.question_text_view);
-		mQuestionNumberView = findViewById(R.id.question_number_view);
+		mScoreView = findViewById(R.id.score_view);
 		mHintButton = findViewById(R.id.hint_button);
 		mRandomButton = findViewById(R.id.random_button);
+		mCheatButton = findViewById(R.id.cheat_button);
 
 		//retrieve state or start new
-		if(savedInstanceState != null)
-			mCurrentIndex = savedInstanceState.getInt(INDEX_KEY);
-		else
-			mCurrentIndex = 0;
+		if(savedInstanceState != null) {
+
+            mCurrentIndex = savedInstanceState.getInt(INDEX_KEY);
+            mCurrentScore = savedInstanceState.getInt(SCORE_KEY);
+        }
+        else
+        {
+            mCurrentIndex = 0;
+            mCurrentScore = 0;
+        }
 
 		updateQuestion();
+        updateScore();
 
 		//give widgets their listeners
 		mTrueButton.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +143,14 @@ public class LyokoQuizActivity extends AppCompatActivity {
                 Toast.makeText(LyokoQuizActivity.this, mQuestionBank[mCurrentIndex].getHintId(), Toast.LENGTH_SHORT).show();
             }
         });
+		mCheatButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View view)
+			{
+				Intent intent = CheatActivity.newIntent(getApplicationContext(), mQuestionBank[mCurrentIndex].getAnswer());
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -163,5 +189,7 @@ public class LyokoQuizActivity extends AppCompatActivity {
 		super.onSaveInstanceState(bundle);
 		Log.i(TAG, "onSaveInstanceState");
 		bundle.putInt(INDEX_KEY, mCurrentIndex);
+		bundle.putInt(SCORE_KEY, mCurrentScore);
 	}
+
 }

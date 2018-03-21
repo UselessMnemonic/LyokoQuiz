@@ -34,7 +34,7 @@ public class Question
         mHintId = hintId;
     }
 
-    public boolean isAnswer() {
+    public boolean getAnswer() {
         return mAnswer;
     }
 
