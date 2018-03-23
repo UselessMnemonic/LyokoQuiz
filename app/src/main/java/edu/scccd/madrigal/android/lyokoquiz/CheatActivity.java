@@ -1,9 +1,11 @@
 package edu.scccd.madrigal.android.lyokoquiz;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,11 +13,11 @@ import android.widget.TextView;
 public class CheatActivity extends AppCompatActivity {
 
     public static final String EXTRA_ANSWER = "edu.scccd.madrigal.android.lyokoquiz.answer";
-    public static final String CHEATED = "CHEATED";
+    public static final String EXTRA_CHEATED = "edu.scccd.madrigal.android.lyokoquiz.cheated";
     Button mShowAnswerButton;
     TextView mAnswerTextView;
     boolean mAnswer;
-    boolean mCheated;
+    boolean mCheater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,13 @@ public class CheatActivity extends AppCompatActivity {
         mAnswerTextView = findViewById(R.id.answer_text_view);
 
         mAnswer = getIntent().getBooleanExtra(EXTRA_ANSWER, false);
-
         if(savedInstanceState != null)
-            cheat();
+        {
+            if(savedInstanceState.getBoolean(EXTRA_CHEATED, false))
+                cheat();
+        }
+        else
+            mCheater = false;
 
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +46,11 @@ public class CheatActivity extends AppCompatActivity {
 
     private void cheat()
     {
+        mCheater = true;
         mAnswerTextView.setText(Boolean.toString(mAnswer));
-        mCheated = true;
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_CHEATED, mCheater);
+        setResult(Activity.RESULT_OK, intent);
     }
 
     public static Intent newIntent(Context packageContext, boolean answer){
@@ -50,9 +59,15 @@ public class CheatActivity extends AppCompatActivity {
         return intent;
     }
 
+    public static boolean hasCheated(Intent intent)
+    {
+        return intent != null && intent.getBooleanExtra(EXTRA_CHEATED, false);
+    }
+
     @Override
-    protected void onSaveInstanceState(Bundle bundle){
+    protected void onSaveInstanceState(Bundle bundle)
+    {
         super.onSaveInstanceState(bundle);
-        bundle.putBoolean(CHEATED, mCheated);
+        bundle.putBoolean(EXTRA_CHEATED, mCheater);
     }
 }

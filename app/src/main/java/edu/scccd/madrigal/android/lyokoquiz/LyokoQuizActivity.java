@@ -1,8 +1,11 @@
 package edu.scccd.madrigal.android.lyokoquiz;
 
+import android.app.Instrumentation;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.system.Os;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,6 +20,9 @@ public class LyokoQuizActivity extends AppCompatActivity {
     private static final String TAG = "LyokoQuizActivity";
     private static final String INDEX_KEY = "index";
     private static final String SCORE_KEY = "score";
+    private static final String CHEATER_KEY = "cheater";
+    private static final String ANSWERED_KEY = "answered";
+    private static final int CHEAT_CALLBACK = 1337;
 
 	private Button mTrueButton, mFalseButton, mHintButton, mCheatButton;
 	private ImageButton mNextButton, mPrevButton, mRandomButton;
@@ -37,6 +43,9 @@ public class LyokoQuizActivity extends AppCompatActivity {
 			new Question(R.string.question10, R.string.hint10, true),
 	};
 
+	private boolean[] mCheatedArray;
+	private boolean[] mHasAnsweredArray;
+
 	private int mCurrentIndex = 0;
 
 	private void updateQuestion() {
@@ -48,13 +57,21 @@ public class LyokoQuizActivity extends AppCompatActivity {
     }
 
 	private void checkAnswer(boolean answer) {
-		if(answer == mQuestionBank[mCurrentIndex].getAnswer()) {
+	    if(mCheatedArray[mCurrentIndex])
+        {
+            Toast.makeText(LyokoQuizActivity.this, R.string.judgement_toast, Toast.LENGTH_LONG).show();
+        }
+        else if (mHasAnsweredArray[mCurrentIndex]){
+	        Toast.makeText(LyokoQuizActivity.this, R.string.already_answered_toast, Toast.LENGTH_LONG).show();
+        }
+		else if(answer == mQuestionBank[mCurrentIndex].getAnswer()) {
             Toast.makeText(LyokoQuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
             mCurrentScore++;
             updateScore();
         }
 		else
 			Toast.makeText(LyokoQuizActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        mHasAnsweredArray[mCurrentIndex] = true;
 	}
 
 	@Override
@@ -80,11 +97,15 @@ public class LyokoQuizActivity extends AppCompatActivity {
 
             mCurrentIndex = savedInstanceState.getInt(INDEX_KEY);
             mCurrentScore = savedInstanceState.getInt(SCORE_KEY);
+            mCheatedArray = savedInstanceState.getBooleanArray(CHEATER_KEY);
+            mHasAnsweredArray = savedInstanceState.getBooleanArray(ANSWERED_KEY);
         }
         else
         {
             mCurrentIndex = 0;
             mCurrentScore = 0;
+            mCheatedArray = new boolean[mQuestionBank.length];
+            mHasAnsweredArray = new boolean[mQuestionBank.length];
         }
 
 		updateQuestion();
@@ -147,8 +168,17 @@ public class LyokoQuizActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view)
 			{
-				Intent intent = CheatActivity.newIntent(getApplicationContext(), mQuestionBank[mCurrentIndex].getAnswer());
-				startActivity(intent);
+			    if(mCheatedArray[mCurrentIndex])
+                {
+                    Toast.makeText(LyokoQuizActivity.this, R.string.judgement_toast, Toast.LENGTH_LONG).show();
+                }
+			    else if(mHasAnsweredArray[mCurrentIndex]) {
+                    Toast.makeText(LyokoQuizActivity.this, R.string.already_answered_toast, Toast.LENGTH_LONG).show();
+                }
+                else if(!mCheatedArray[mCurrentIndex]) {
+                    Intent intent = CheatActivity.newIntent(getApplicationContext(), mQuestionBank[mCurrentIndex].getAnswer());
+                    startActivityForResult(intent, CHEAT_CALLBACK);
+                }
 			}
 		});
 	}
@@ -190,6 +220,20 @@ public class LyokoQuizActivity extends AppCompatActivity {
 		Log.i(TAG, "onSaveInstanceState");
 		bundle.putInt(INDEX_KEY, mCurrentIndex);
 		bundle.putInt(SCORE_KEY, mCurrentScore);
+		bundle.putBooleanArray(CHEATER_KEY, mCheatedArray);
+		bundle.putBooleanArray(ANSWERED_KEY, mHasAnsweredArray);
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        switch(requestCode)
+        {
+            case CHEAT_CALLBACK: {
+                mCheatedArray[mCurrentIndex] = CheatActivity.hasCheated(data);
+            }
+            break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

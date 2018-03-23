@@ -6,10 +6,11 @@
     <string name="prev_button">Previous</string>
     <string name="hint_button">Hint</string>
     <string name="correct_toast">Awesome!</string>
-    <string name="incorrect_toast">Try Again.</string>
+    <string name="incorrect_toast">Too bad!</string>
     <string name="score_text">Score</string>
     <string name="warning_text">Are you want to see the answer?</string>
     <string name="show_answer_button">Show Answer</string>
     <string name="cheat_button_text">Cheat!</string>
     <string name="judgement_toast">Way to go, Einstein.</string>
+    <string name="already_answered_toast">You already answered.</string>
 </resources>
